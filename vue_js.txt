@@ -1,0 +1,1103 @@
+Vue:
+https://vuejs.org/v2/guide/
+
+Vue-Cli:
+https://cli.vuejs.org/
+
+
+
+	      BASICS
+
+
+Why we need to use Vue JS rather than React JS, Angular JS?
+
+	Lightweight (So, performance is better than React and Angular)
+
+	It is a PROGRESSIVE JAVASCRIPT Framework(means easily adaptable. for eg: We have seperate server side application )
+	
+	Building a COMPLEX APPLICATION using Angular/React is more time consuming process
+	
+	Vue is easier in both designing and API (Recommended one for freshers to learn the JS frameworks)
+	
+	Dynamically update the values 
+	
+	It provides easy way to migrate from existing applications
+	
+
+
+Adv:
+
+	JS Framework like a Angular
+	18 - 21 kb (Lightweight framework)
+	Front end framework and used for Single Page Application (SPA)
+	High runtime performance (much faster than angular)
+	It is good than the Andular and react
+	
+	
+	
+Hist:
+	
+	Initial release 2014
+	OPen Source and used with NPM (can used without NPM also)
+	
+
+
+Vue JS CLI and Laravel(backend):
+	
+		Vue js CLI used for development, build and server etc
+		Laravel(PHP framework) is very much comfortable with backend
+	
+
+Agenda: 
+
+	Component
+	Important features 
+	Template
+	Binding
+	Rendering
+	API calls 
+	Routing 
+	etc.,
+	
+	
+
+Installation:
+
+	1. Install vue-cli by running the command "npm install -g @vue/cli"
+	2. Make project by using "vue create project_name"
+	3. Run the project using "npm run serve"
+	4. Build the project using "npm run build"
+	
+	
+	
+Need of each and every files and folders:
+	
+	1. package.json  => all the dependencies needed for the project
+	2. package-lock.json => detailed version of the package.json 
+	
+		Above files are used to understand the dependencies and its versions. If we have to create a another project with
+		same version of the modules which are used in the another project then just copy the package.,json file and run the command 
+		'npm install' then all the required modules and packages are downloaded.
+		
+	3. babel.config.js => transforms newer JS to Older JS. So, that the older browsers are also understand it.
+	4. 'public'
+			-> index.html - entry point of the HTML not JS entry point
+			
+	
+	5. 'src'
+	
+			-> Components folder - all the components are present here
+				
+				we import all the files in the components into the App.vue file
+			
+			-> assets - fonts, images, css are present here
+			
+			-> main.js - entry point of JS
+			
+				every 'Vue JS'[.vue] files are imported into the main.js file 
+				
+			-> 97% we will work on the source folder
+			
+			
+		
+	
+Components:
+
+	Set of code defined for specific purpose which enables reuability of the code
+	
+	
+	
+	Structure:
+		
+		<template>
+		
+			<!-- Should contain only one root component. So, use 'div' element as the root element -->
+	
+
+		</template>
+		
+		
+		<script>
+		
+		</script>
+		
+		<style scoped>   // scoped attribute is for defining the style to current document
+
+		</style>
+		
+
+
+Events:
+
+	Define method property
+	Define function
+	Make button and click event 
+	How to pass params with event
+	
+
+	Click event -
+	
+		<button v-on:click="helloFunction()"> </button>
+		
+		
+Directives: 
+	
+	Prefixed with 'v-'
+		
+		eg: v-on, v-if, v-else
+
+Arguments: 
+
+	Suffix of 'directives' seperated by ':'
+	
+		eg: v-on:click
+	
+	
+Data function:
+
+	We straight forward use the values returned by data() function inside the attribute of the html element.
+
+	Nothing but defining the variables inside the JS file. We can directly access that variable inside the html(template)
+by using this '{{}}'
+
+
+		Conditional terms in vue:  v-if, v-else-if, v-else
+		
+		eg:
+		
+			<template>
+				<div>
+					<h1 v-if="show">Showing the if part</h1>
+					<h1 v-else>Showing the else part</h1>
+				</div>
+			</template>
+			
+			<script>
+
+				data() {
+					return {
+						show: true;
+					}
+				}
+				
+			</script>
+			
+		
+		For Loop statement:  v-for 
+		
+		eg:
+			
+			<template>
+				<div>
+					<!--for loop -->
+					<table>
+						<tr>
+							<th>Id</th>
+							<th>Name</th>
+							<th>Age</th>
+						</tr>
+						<tr v-for="user in users" :key="user.id">
+							<td>{{user.id}}</td>
+							<td>{{user.name}}</td>
+							<td>{{user.age}}</td>
+						</tr>
+					</table>
+				</div>
+			</template>
+			
+			
+			<script>
+
+				data() {
+					return {
+						show: true,
+						users: [{"id": 1, "name": "Logesh", "age": 21},
+							{"id": 2, "name": "Mano", "age": 22},
+							{"id": 3, "name": "Kaala", "age": 23}
+						]
+					}
+				}
+				
+			</script>
+				
+				
+				
+		Usage of 'v-once':
+		
+			Value of the html tag will updated only once. In the below example, h1 tag only display the 
+		name 'Logesh' only not 'Kaala' when clicking the button. Because we upodated the property 'v-once'.	
+			
+			eg:
+				
+				
+				<template>
+					
+					<div>
+						<h1 v-once>{{name}}</h1>
+						
+						<button v-on:click="update()"></button>
+						
+					</div>
+				</template>
+				
+				<script>
+					export default {
+						data(): {
+							name: "Logesh"
+						},
+						methods: {
+							update() {
+								this.name = "Kaala"
+							}
+						} 
+					}
+				</script>
+				
+		
+		We can also perform 'Arithmetic operations and Conditional Operations using {{}}':
+		
+			eg:
+			
+				If Ok is true then it prints Yes otherwise No will be print
+				
+				
+				<template>
+					<h1>{{100+1}}</h1>
+					
+					<h2>{{ok? "Yes": "No"}}</h2>
+					
+					<button v-on:click="click()">Click</button>
+				</template>
+				
+				<script>
+					export default {
+						data(): {
+							ok: true
+						},
+						methods: {
+							click() {
+								this.ok = !this.ok
+							}
+						} 
+					}
+				</script>
+				
+				
+			
+		We can include the HTML file from the DATA Property:	
+		
+		
+			eg: 
+			
+				<template>
+				
+					<div v-html="header">
+					</div>
+					
+				</template>
+				
+				<script>
+					export default {
+						data(): {
+							header: "<h1>Hello world</h1>"
+						}
+					}
+				</script>
+				
+		We can DISABLE the BUTTON:
+		
+			
+			eg:
+				
+				<template>
+				
+					<div>
+						<button v-bind:disabled="btnDisable">Click</button>
+					</div>
+					
+				</template>
+				
+				<script>
+					export default {
+						data(): {
+							btnDisable: true
+						}
+					}
+				</script>
+			
+			More reference:
+			
+				https://vuejs.org/v2/guide/syntax.html
+				
+			
+			
+			
+		Apply Classes and Styles using Binding techniques:
+			
+			Normally we use the classes like 'class="yellowBg"' this way. We can manipulate the classes by defining some
+		some conditions.
+			
+			eg:
+				
+				<template>
+				
+					<div>
+						
+						<h1 class="yellowBg">Normal Class Defining Way</h1>
+						<h1 style="color: red">Normal Style Defining Way</h1>
+						<h1 v-bind:class="{yellowBg: allowYellow}">Defining the Classes with some conditions</h1>
+						<h1 v-bind:class="[yellowBg, redText]">Defining the list of classes</h1>
+						<h1 v-bind:style="{color: yellowColor}">Stye with property</h1>
+						<button v-bind:disabled="btnDisable">Click</button>
+					</div>
+					
+				</template>
+				
+				<script>
+					export default {
+						data(): {
+							allowYellow: true,
+							yellowColor: "yellow"
+						}
+					}
+				</script>
+				
+				<style>
+				.yellowBg {
+					background-color: yellow;
+				},
+					
+				.redText {
+					color: red;
+				}
+				</style>
+				
+		
+		
+		Data binding using 'v-model' directive:
+		
+			eg:
+				<template>
+					<div>
+						<h1>{{message}}</h1>
+						<input type="text" v-model="message">
+					</div>
+				</template>
+
+				<script>
+				export default {
+					data() {
+						return {
+							message: "Hai"
+						}
+					}
+				}
+				</script>
+				
+				
+				Here, message inside the 'h1' tag will change based on the value entered in the 'input' tag. 
+			Means 'message' property inside the 'data()' function will dynamically updated here.
+			
+			
+		
+		Parent to Child: (we already seen)
+		
+			eg:
+				
+				<Users data="name" message="logesh"/>
+		
+		
+		Child to Parent: 
+		
+			eg:
+			
+			We can also use '@' in place of 'v-on'. i.e. 'v-on:click' <=> '@click'
+			
+			Parent.vue:
+			
+				<template>
+					<div>
+						<h1 v-on:changeTitle="changeTheTitle($event)">{{title}}</h1>
+					</div>
+				</template>
+
+				<script>
+				export default {
+					data() {
+						return {
+							title: "Hai, Logesh"
+						}
+					},
+					methods(): {
+						changeTheTitle(newTitle) {
+							this.title = newTitle
+						}
+					}
+				}
+				</script>
+			
+			
+			Child.vue:
+			
+				<template>
+					<div>
+						<button v-on:click="changeValue()">Click</button>
+					</div>
+				</template>
+
+				<script>
+				export default {
+					methods: {
+						changeValue() {
+							return {
+								this.$emit('changeTitle', 'Passed from the child')
+							}
+						}
+					}
+				}
+				</script>
+				
+		
+		Vue JS Life Cycle Methods:
+		
+			Workflow:  https://vuejs.org/v2/guide/instance.html#Lifecycle-Diagram
+							
+		
+			General Methods => Create, Update, Mount, Destroy
+				
+				
+				1. beforeCreate: function()
+				
+				2. created: function()
+				
+				3. beforeMount: function()
+				
+				4. mounted: function()
+				
+				5. beforeDestroy: function()
+				
+				6. destroyed: function()
+				
+				
+				We no need to call the each of the functions seperately.
+				
+				
+			Benefits:
+			
+				We want call one API's beforeMounting.
+				
+				
+		
+		Filter in Vue JS:
+		
+			Modify the data.
+
+				eg: 1. convert the lower case letters to uppercase OR 
+					2. to convert the $ values to rupees
+			
+			Why we need to use the Filters instead of creating the function ?
+			
+				-> Scenario like using the same function in many files. 
+				-> We no need to import or call any functions.
+			
+			
+			
+			eg:
+				
+				Syn:
+					
+					Vue.filter(filter_name, function(val)) {
+						return (val);
+					}
+				
+				We define the FILTER inside the main.js file thren it will be used in any where
+				
+				Converting the Rupees into Currency, CInverting the lowercase letters into uppercase:
+					
+				main.js:
+				
+					Vue.filter('Upper', function(val)) {
+						return (val.toUpperCase());
+					}
+					
+					Vue.filter('dollarConverter', function(val))
+					{
+						return (val * 75);
+					}
+					
+					
+					
+					alter:
+					
+					filters: {
+						Upper: funtion(val) {
+							return val.toUpperCase();
+						}
+					}
+				
+				App.vue:
+				
+					<template>
+						<div>
+							<h1>{{name}} | Upper</h1>
+							<h2>{{rupees}} | dollarConverter</h2>
+						</div>
+					</template>
+					
+					
+					<script>
+						data() {
+							return {
+								name: "Logesh",
+								rupees: 100
+							}
+						}
+					</script>
+					
+				
+				Likewise, we can use the filters inside any components.
+					
+			
+
+		'computed' in Vue JS:
+		
+			Same like filter. But we can iclude it globally.
+			
+			eg:
+			
+			<template>
+			
+				{{appendLetter}}				<!-- Included the 'computed property globally'-->
+			
+				<p>{{username}}</p>
+				<input type="text" v-model="username"/>
+			</template>
+			
+			<script>
+				export default {
+					data(): {
+						return ({
+							username: null
+						})	
+					},
+					computed: {
+					
+						appendLetter: function() {
+							if(this.username.length > 2) {
+								return (this.username + 'y');
+							} 
+						}
+					}
+				}
+			</script>
+			
+			
+		
+		
+	BOOTSTRAP in VUE JS:
+		
+		https://bootstrap-vue.org/docs
+		
+		Installation:
+		
+			Way 1: npm install vue bootstrap bootstrap-vue    (Recommended - Working for me)
+			
+			
+			Steps:
+				
+				Either in App.js or main.js
+				
+					1. import { BootstrapVue, IconsPlugin, LayoutPlugin } from 'bootstrap-vue'
+					
+						We have include specific plugins to use the specific features
+					
+							Vue.use(BootstrapVue);
+						
+							Vue.use(IconsPlugin);
+							
+							Vue.use(LayoutPlugin);   // for using the container, row, col [Grid Layout]
+						
+					2. import 'bootstrap/dist/css/bootstrap.css'
+					
+					3. import 'bootstrap-vue/dist/bootstrap-vue.css'
+				
+				
+			Way 2: vue add bootstrap-vue           (Not recommended - not working for me)
+			
+	
+	
+	ROUTING:
+		
+		We can open the different COMPONENTS in DIFFERENT URL's
+			
+			eg: we can open the 'loginComponent' in 'http://localhost:8080/login' url.
+		
+		Installation: (By default not provided)
+		
+			npm install vue-router 
+			
+			Steps: (in main.js file)
+			
+				1. import VueRouter from 'vue-router';  
+				
+				2. import HomeComponent from './components/HomeComponent';   all the compomnents like this 
+				
+				3. Create 'routes' => const routes = [ {path: '/', component: HomeComponent },
+													   {path: '/about', component: AboutComponent}
+													   { }]
+													   
+				4. Create 'VueRouter' => const router = new VueRouter({routes});
+				
+				5. Add the 'router' inside the vue instance => new Vue({
+																		router: router}
+																		
+				(in App.vue file)
+				
+				1. Remove all the components imported inside the file.
+				2. Update: => 	<template>
+									<router-view></router-view>
+								</template>
+		
+	PROPS:
+	
+	1. Sending message directly inside the 'ChildComponent tag' in ParentComponent:
+
+		Parent Component:
+
+			<template>
+				<div>
+					<ChildCompoent data="Name" message="Logesh"/>
+				</div>
+			</template>
+		
+			<script>
+				import ChildComponent from './compomnents/ChildComponent.vue';
+				
+				export default {
+					name: "ParentComponent"
+				}
+			</script>
+			
+	
+		Child Component:
+		
+			
+			<template>
+				<div>
+					<h1>{{name}}</h1>
+					<h2>{{message}}</h2>
+				</div>
+			</template>
+		
+			<script>
+				
+				export default {
+					name: "ChildComponent",
+					
+															//Defining props in the ChildComponent which was passed by parent
+					props: {
+						name: String,
+						message: String
+					}
+				}
+			</script>	
+		
+	2. Sending message from the value defined inside the 'Script tag' in ParentComponent:
+			
+		Parent Component:
+
+			<template>
+				<div>
+					<ChildCompoent v-bind:users=users/>
+				</div>
+			</template>
+		
+			<script>
+				import ChildComponent from './compomnents/ChildComponent.vue';
+				
+				export default {
+					name: "ParentComponent",
+					data() {
+						users: [
+							{"id": 1, "name": "Logesh", "age": 21},
+							{"id": 2, "name": "Mano", "age": 22},
+							{"id": 3, "name": "Kaala", "age": 23}}
+						]
+					}
+				}
+			</script>
+			
+	
+		Child Component:
+		
+			
+			<template>
+				<div>
+					<table>
+						<tr>
+							<th>Id</th>
+							<th>Name</th>
+							<th>Age</th>
+						</tr>
+						<tr v-for="user in users" :key="user.id">
+							<td>{{user.id}}</td>
+							<td>{{user.name}}</td>
+							<td>{{user.age}}</td>
+						</tr>
+					</table>
+				</div>
+			</template>
+		
+			<script>
+				
+				export default {
+					name: "ChildComponent"
+				}
+			</script>	
+
+
+	
+	
+	Adding FONT-AWESOME to the VUE JS Project:
+	
+		https://github.com/FortAwesome/vue-fontawesome
+		
+	
+		Installation:
+		
+			npm i --save @fortawesome/free-brands-svg-icons
+			
+			npm i --save @fortawesome/free-regular-svg-icons
+		
+			npm install --save @fortawesome/vue-fontawesome@latest
+			
+		Steps: (in main.js)
+					
+			1. Importing:
+			
+				import { library } from '@fortawesome/fontawesome-svg-core';
+				
+				import { fas } from '@fortawesome/free-solid-svg-icons';
+
+				import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome';
+			
+			2. Adding:
+			
+				library.add(fas);
+				
+				Vue.component('font-awesome-icon', FontAwesomeIcon);
+					
+			
+			
+			
+	
+	
+	Tutorial Shared by @hari sir: [https://www.youtube.com/watch?v=4deVCNJq3qc]
+	
+	
+		Creating the Quiz APp:
+		
+		
+			We download the QUESTIONS from https://www.opentdb.com.
+			
+			Here, we can generate our own API[means gives JSON file as URL].
+			
+			I generated a SPORTS QUESTIONS(https://opentdb.com/api.php?amount=10&category=21&difficulty=easy&type=multiple)
+				
+			
+			Fetching the API and store it in a 'questions' variable(list of objects[question, correct_answer, incorrect_answer]):
+				
+				mounted: function() {
+					fetch('https://opentdb.com/api.php?amount=10&category=21&difficulty=easy&type=multiple', {method: 'get'})
+					.then((response) => {
+						return response.json();
+					})
+					.then((jsonData) => {
+						this.questions = jsonData.results;
+					})
+				}
+				
+				
+	
+	Vuex Store: 
+	
+		Generally, 'store.js' in Vue App.
+		
+		It is an GLOBAL OBJECT. 
+		
+		We can store the DATA, FUNCTIONS here which will accessed in more number of components.
+		
+		
+		
+		
+				
+	SHORTCUT:
+
+		When we try to include the file we have specify the exact path. If we wwant to move to the parent directory
+	we use '../'. If we have more parent directory then the path will be very big. So, in Vue-Cli '@' navigate we into 
+	the 'src' directory.
+	
+		eg: import NavigationComponent from '@/component/NavigationComponent'
+		
+	
+	
+	Dynamically accessing the route:
+	
+		we define the routes like following way:
+		
+		routes = [
+			{path: '/cats', component: "CatsComponent"},
+			// dynamically accessing 'id'
+			{path: '/cats/:id', component: "CatComponent"}
+		]
+		
+		
+		We can access the value of 'id' by using '$route.params.id'.
+		
+		
+		
+	
+	
+	
+	FLUX Architecture:
+		
+		In react, we mention this concept like a REACT REDUX.
+	
+	
+	STATE MANAGEMENT in VUE JS: (VUEX - State management library)
+
+		Gives Centralised storage for all the components
+		
+		
+		
+		
+		State - App level state/data(todos, posts, token etc.,)
+		
+		Getters - Get pieces of state or computed values from state 
+		
+		Actions - called from components to commit a mutation 
+		
+		Mutations - mutate the state (update data, etc)
+		
+		Modules - each module have its own state, getters, actions, mutations (posts module, auth module, etc )
+		
+		
+		
+		https://jsonplaceholder.typicode.com/todos - acts as a backend
+		
+		
+		AXIOS LIBRARY: 
+		
+			axios - used to make a HTTP request to the JSON PLACEHOLDER
+			
+			
+			simply using axios.get(); we can get our own JSON documents. 
+			
+		
+		
+			
+				
+
+
+
+store/index.js => entry point of VUEX
+
+			   => inside which we are going to initialise our store
+			   
+	After creating the store we have to add it to our application by includeing the store in main.js files.
+	
+	
+	
+	
+	
+	#e8f7f0     LIGHT GREEN
+	
+	#41b883     DARK GREEN
+	
+	
+	
+	
+	store creation:
+	
+		import Vuex from 'vuex';
+		import Vue from 'vue';
+		
+		Vue.use(Vuex);
+
+		export default new Vuex.store({
+			modules: {
+				// we can import our modules here. Module contains the STATE, GETTERS, ACTIONS, MUTATIONS
+			}
+		});
+		
+	example module creation:
+	
+	
+		const state = {
+		};
+		
+		const getters = {
+		};
+		
+		const actions = {};
+		
+		const mutations = {
+		};
+		
+		
+		export default {
+			state state, 
+			getters: getters,
+			actions: actions,
+			mutations: mutations
+		}
+		
+			
+		
+		allTodos: (state) => {
+			return state.todos;
+		}
+		
+		
+		actions =>
+		
+		fetchTodos: ({commit}, ) => {
+			
+			commit('name in mutation', params);
+		}
+		
+		
+		
+		
+		
+		
+		
+		VUETIFY => provides TEMPLATES which uses Material Design Components more and more.
+		
+		
+		What is Vuetify?  https://vuetifyjs.com/en/introduction/why-vuetify/#what-is-vuetify3f
+		
+			Vuetify is a complete UI framework built on top of Vue.js. The goal of the project is to provide developers 
+		with the tools they need to build rich and engaging user experiences.
+		
+		
+		
+		Why?  https://vuetifyjs.com/en/introduction/why-vuetify/#why-vuetify3f
+		
+		
+		
+		Different Kinds of Frames = https://vuetifyjs.com/en/getting-started/wireframes/
+		
+		
+		Material Design Color Pallets: https://vuetifyjs.com/en/styles/colors/#material-colors
+		
+		
+		Material Design Icons: https://vuetifyjs.com/en/features/icon-fonts/#installing-icon-fonts
+		
+		
+
+		Material Design Cards: https://vuetifyjs.com/en/components/cards/#usage
+	
+		Material Design in Vue JS:
+		
+		
+		
+		
+		
+		<v-navigation-drawer v-model="drawer" app>
+			<v-list>
+				<v-list-item>
+					<v-list-item-title>
+					
+					</v-list-item-title>
+					
+					<v-list-item-subtitle>
+					
+					</v-list-item-subtitle>
+				</v-list-item>
+				
+				<v-divider></v-divider>
+				
+				<v-list-item>
+					<v-list-item-content>
+						
+					</v-list-item-content>
+				</v-list-item>
+				
+			</v-list>
+		</v-navigation-drawer>
+				
+				
+		<v-app-bar src="image">
+			<v-app-bar-nav-icon @click="drawer = !drawer "></v-list-item-nav-icon>
+			
+			<
+		</v-app-bar>
+		
+		
+		
+		
+		testcase-id and test-step:
+		
+		
+		
+		
+		
+		
+		items: [
+			{
+				'id':'1',
+				'title': 'hello',
+				'description': 'ok ok',
+				'created_date': '2018-09-09'
+			},
+			{
+				'id':'2',
+				'title': 'hello 2',
+				'description': 'ok ok 2',
+				'created_date': '2018-10-09'
+			}
+		]
+		
+		<table>
+			<tr>
+				id1
+				status
+			</tr>
+		</table>
+		
+		
+		
+		
+		
+
+
+		
+
+				
+		
+			
+				
+					
+				
+		
+				
+			
+			
+				
+
+		
+
+
+	
+				
+			
+			
+	
+	
+
+
+	
+	
+
+	
